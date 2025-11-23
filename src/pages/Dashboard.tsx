@@ -45,9 +45,9 @@ export default function Dashboard() {
       ) {
         setCommits(participation.all.slice(-4));
       } else {
-        setCommits([0, 0, 0, 0]); // fallback simples
+        setCommits([0, 0, 0, 0]);
       }
-      
+
     } catch (e) {
       console.log(e);
     }
@@ -55,29 +55,68 @@ export default function Dashboard() {
     setLoading(false);
   }
 
-  // Carregar repo mais popular ao iniciar
   useEffect(() => {
     loadRepository("stars:>1");
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "40px 20px",
+        maxWidth: 1200,
+        width: "100%",
+        margin: "0 auto",
+        fontFamily: "Inter, Arial, sans-serif",
+        boxSizing: "border-box",
+      }}
+    >
       <SearchBar onSearch={loadRepository} />
 
-      {loading && <p>Carregando...</p>}
+      {loading && <p style={{ color: "#c9d1d9" }}>Carregando...</p>}
 
       {repo && (
         <>
           <RepoInfoCard repo={repo} />
 
-          <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
+          <div 
+            style={{ 
+              display: "flex", 
+              gap: 20, 
+              width: "100%", 
+              marginTop: 20, 
+              marginBottom: 20,
+              flexWrap: "wrap"
+            }}
+          >
             <StatsCard label="Stars" value={repo.stargazers_count} />
             <StatsCard label="Forks" value={repo.forks_count} />
             <StatsCard label="Watchers" value={repo.watchers_count} />
           </div>
 
-          {commits && <CommitsChart data={commits} />}
-          {languages && <LanguagesChart data={languages} />}
+          <div 
+            style={{ 
+                display: "flex", 
+                gap: 20, 
+                width: "100%", 
+                flexWrap: "wrap"
+            }}
+          >
+            {commits && (
+                <CommitsChart 
+                    data={commits} 
+                    style={{ flex: 1, minWidth: "350px" }}
+                />
+            )}
+            {languages && (
+                <LanguagesChart 
+                    data={languages} 
+                    style={{ flex: 1, minWidth: "350px" }} 
+                />
+            )}
+          </div>
         </>
       )}
     </div>

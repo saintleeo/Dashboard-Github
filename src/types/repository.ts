@@ -15,6 +15,5 @@ export type Repository = {
     watchers_count: number;
     owner: RepoOwner;
     language?: string;
+    private: boolean;
 };
-
-// tipagem das repostas da API

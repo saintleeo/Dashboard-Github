@@ -41,5 +41,5 @@ export async function getRepoParticipation(owner: string, repo: string) {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Erro ao buscar commits");
   
-    return res.json(); // retorna array com commits das últimas 52 semanas
+    return res.json();
   }
