@@ -31,4 +31,3 @@ Consumindo dados diretamente da **API pública do GitHub**.
 - **Fetch API**
 
 ---
-Acesse aqui: [Dashboard](dashboard-github-sigma.vercel.app)
